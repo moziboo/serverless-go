@@ -1,0 +1,63 @@
+service: mmmelton-backend-go
+
+provider:
+  name: aws
+  runtime: provided.al2023
+  region: us-west-2
+
+useDotenv: true
+
+custom:
+  corsDefault:
+    origins:
+      - "http://localhost:3000"
+      - "http://localhost:3001"
+      - "https://mmmelton.com"
+    headers:
+      - Api-Key
+      - Content-Type
+      - X-Amz-Date
+      - Authorization
+      - X-Api-Key
+      - X-Amz-Security-Token
+      - X-Amz-User-Agent
+
+  authorizerDefault:
+    type: TOKEN
+    name: apiAuthorizer
+    identitySource: method.request.header.Api-Key
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+functions:
+  apiAuthorizer:
+    handler: bootstrap
+    package:
+      artifact: bin/auth.zip
+    environment:
+      API_KEY: ${env:API_KEY}
+
+  mainFunction:
+    handler: bootstrap
+    package:
+      artifact: bin/hello.zip
+    events:
+      - http:
+          path: /
+          method: get
+          cors: ${self:custom.corsDefault}
+          authorizer: ${self:custom.authorizerDefault}
+
+  secondFunction:
+    handler: bootstrap
+    package:
+      artifact: bin/hello.zip
+    events:
+      - http:
+          path: /sub
+          method: get
+          cors: ${self:custom.corsDefault}
+          authorizer: ${self:custom.authorizerDefault}

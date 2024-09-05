@@ -1,0 +1,90 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+*node_modules
+*.pnp
+.pnp.js
+
+# testing
+/coverage
+
+#ci/cd
+*.serverless
+
+# production
+*build
+*bin
+
+# misc
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ignore runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore various IDEs and editors folders
+.vscode/
+.idea/
+*.sw*
+*.swo
+
+# Ignore dotenv environment variable files
+.env
+.env.dev
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore SASS config files
+.sass-cache
+
+# --- Terraform ---
+# Ignore .terraform directories
+**/.terraform/*
+*.terraform
+
+# Ignore .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Ignore crash log files
+crash.log
+
+# Ignore override files as they can contain sensitive details
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore all .tfvars files as they might contain sensitive data
+*.tfvars
+
+# Ignore Terraform .plan files
+*.plan
+
+# Additional files
+*.backup
+*.bak

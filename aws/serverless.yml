@@ -62,13 +62,13 @@ functions:
           cors: ${self:custom.corsDefault}
           authorizer: ${self:custom.authorizerDefault}
 
-  pathFunction:
+  userFunction:
     handler: bootstrap
     package:
-      artifact: bin/path.zip
+      artifact: bin/bloguser.zip
     events:
       - http:
-          path: /{path}
+          path: /user/{user}
           method: get
           cors: ${self:custom.corsDefault}
           authorizer: ${self:custom.authorizerDefault}
